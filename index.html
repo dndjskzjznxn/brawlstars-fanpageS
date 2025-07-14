@@ -3,83 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <title>브롤스타즈 팬사이트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #f7f7f7;
-      color: #222;
-    }
-    h1 {
-      background: #ffe600;
-      margin: 0;
-      padding: 32px 0 16px 0;
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    main {
-      max-width: 600px;
-      margin: 32px auto;
-      padding: 0 16px;
-    }
-    section {
-      background: #fff;
+    .random-brawler {
+      background: #fffbe6;
       border-radius: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      margin-bottom: 32px;
+      margin: 32px auto 0 auto;
       padding: 24px 16px 16px 16px;
+      max-width: 400px;
+      text-align: center;
     }
-    h2 {
-      font-size: 1.3rem;
-      margin-top: 0;
-      color: #0074d9;
+    .random-brawler img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 8px;
+      border: 2px solid #ffe600;
+      background: #fff;
     }
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      margin-top: 12px;
+    .random-brawler button {
+      margin-top: 10px;
+      padding: 6px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #ffe600;
+      color: #222;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-      main {
-        margin: 16px auto;
-        padding: 0 8px;
-      }
-      section {
-        padding: 16px 8px 8px 8px;
-      }
-      h2 {
-        font-size: 1.1rem;
-      }
+    .random-brawler button:hover {
+      background: #ffd600;
     }
   </style>
 </head>
 <body>
-  <h1>브롤스타즈 팬사이트</h1>
+  <header>
+    <h1>⭐ 브롤스타즈 팬사이트 ⭐</h1>
+  </header>
   <main>
-    <section>
-      <h2>기어 설명 화면</h2>
-      <img src="gear.jpg" width="100%" alt="기어 설명 화면">
-    </section>
-    <section>
-      <h2>패배 장면</h2>
-      <img src="lose.jpg" width="100%" alt="패배 장면">
-    </section>
-    <section>
-      <h2>팀 참가 요청 화면</h2>
-      <img src="team_request.jpg" width="100%" alt="팀 참가 요청 화면">
-    </section>
-    <section>
-      <h2>승리 장면</h2>
-      <img src="victory.jpg" width="100%" alt="승리 장면">
-    </section>
+    <div class="gallery">
+      <section>
+        <h2>기어 설명 화면</h2>
+        <div class="img-card">
+          <img src="gear.jpg" alt="기어 설명 화면">
+        </div>
+      </section>
+      <section>
+        <h2>패배 장면</h2>
+        <div class="img-card">
+          <img src="lose.jpg" alt="패배 장면">
+        </div>
+      </section>
+      <section>
+        <h2>팀 참가 요청 화면</h2>
+        <div class="img-card">
+          <img src="team_request.jpg" alt="팀 참가 요청 화면">
+        </div>
+      </section>
+      <section>
+        <h2>승리 장면</h2>
+        <div class="img-card">
+          <img src="victory.jpg" alt="승리 장면">
+        </div>
+      </section>
+    </div>
+    <div class="random-brawler">
+      <h2>오늘의 랜덤 브롤러</h2>
+      <img id="brawler-img" src="" alt="랜덤 브롤러">
+      <div id="brawler-name" style="font-size:1.2rem; font-weight:bold; margin:8px 0;"></div>
+      <button onclick="randomBrawler()">다른 브롤러 보기</button>
+    </div>
   </main>
+  <script>
+    // 브롤러 데이터 (이름, 이미지)
+    const brawlers = [
+      { name: '쉘리', img: 'https://static.wikia.nocookie.net/brawlstars/images/6/6a/Shelly_Skin-Default.png' },
+      { name: '콜트', img: 'https://static.wikia.nocookie.net/brawlstars/images/2/2b/Colt_Skin-Default.png' },
+      { name: '니타', img: 'https://static.wikia.nocookie.net/brawlstars/images/2/2e/Nita_Skin-Default.png' },
+      { name: '불', img: 'https://static.wikia.nocookie.net/brawlstars/images/2/2a/Bull_Skin-Default.png' },
+      { name: '브록', img: 'https://static.wikia.nocookie.net/brawlstars/images/2/2d/Brock_Skin-Default.png' },
+      { name: '다이너마이크', img: 'https://static.wikia.nocookie.net/brawlstars/images/2/2c/Dynamike_Skin-Default.png' },
+      { name: '보', img: 'https://static.wikia.nocookie.net/brawlstars/images/2/2e/Bo_Skin-Default.png' }
+    ];
+    function randomBrawler() {
+      const idx = Math.floor(Math.random() * brawlers.length);
+      document.getElementById('brawler-img').src = brawlers[idx].img;
+      document.getElementById('brawler-name').innerText = brawlers[idx].name;
+    }
+    randomBrawler();
+  </script>
 </body>
 </html>
